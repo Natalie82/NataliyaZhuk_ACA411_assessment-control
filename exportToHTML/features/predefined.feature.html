@@ -1,0 +1,161 @@
+<html>
+<head>
+<title>predefined.feature</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #629755; font-style: italic;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #bbb529;}
+.s3 { color: #cc7832;}
+.s4 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+predefined.feature</font>
+</center></td></tr></table>
+<pre><span class="s0"># Automate search for the following search engines:</span>
+ <span class="s0"># Task: https://jira.portnov.com/browse/ACA-647</span>
+<span class="s0"># Author: Nataliya Zhuk</span>
+
+<span class="s2">@predefined</span>
+<span class="s3">Feature</span><span class="s1">: </span><span class="s4">Smoke steps</span>
+
+  <span class="s2">@predefined1</span>
+  <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for Google</span>
+    <span class="s3">Given </span><span class="s4">I open url &quot;https://google.com&quot;</span>
+    <span class="s3">Then </span><span class="s4">I should see page title as &quot;Google&quot;</span>
+    <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@name='q']&quot; should be present</span>
+    <span class="s3">When </span><span class="s4">I type &quot;Behavior Driven Development&quot; into element with xpath &quot;//input[@name='q']&quot;</span>
+    <span class="s3">Then </span><span class="s4">I click on element using JavaScript with xpath &quot;(//input[@name='btnK'])[1]&quot;</span>
+    <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//*[@id='res']&quot; to be present</span>
+    <span class="s3">Then </span><span class="s4">element with xpath &quot;//*[@id='res']&quot; should contain text &quot;Cucumber&quot;</span>
+
+  <span class="s2">@predefined2</span>
+  <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for Gibiru</span>
+    <span class="s3">Given </span><span class="s4">I open url &quot;https://gibiru.com&quot;</span>
+    <span class="s3">Then </span><span class="s4">I should see page title as &quot;Gibiru – Protecting your privacy since 2009&quot;</span>
+    <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='q']&quot; should be present</span>
+    <span class="s3">When </span><span class="s4">I type &quot;Behavior Driven Development&quot; into element with xpath &quot;//input[@id='q']&quot;</span>
+    <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//button[@type='submit']&quot;</span>
+    <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//*[@id='web-results']&quot; to be present</span>
+    <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+    <span class="s3">Then </span><span class="s4">element with xpath &quot;//*[@id='web-results']&quot; should contain text &quot;Behavior Driven Development&quot;</span>
+
+  <span class="s2">@predefined3</span>
+  <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for DuckDuckGo</span>
+    <span class="s3">Given </span><span class="s4">I open url &quot;https://duckduckgo.com/&quot;</span>
+    <span class="s3">Then </span><span class="s4">I should see page title as &quot;DuckDuckGo — Privacy, simplified.&quot;</span>
+    <span class="s3">Then </span><span class="s4">I should see page title contains &quot;DuckDuckGo&quot;</span>
+    <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='search_form_input_homepage']&quot; should be present</span>
+    <span class="s3">When </span><span class="s4">I type &quot;Duck&quot; into element with xpath &quot;//input[@id='search_form_input_homepage']&quot;</span>
+    <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//input[@id='search_button_homepage']&quot;</span>
+    <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//form[@id='search_form']&quot; to be present</span>
+    <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+    <span class="s3">Then </span><span class="s4">element with xpath &quot;//article[@id='r1-1']&quot; should contain text &quot;Duck&quot;</span>
+    
+  <span class="s2">@predefined4</span>
+   <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for Swisscows</span>
+     <span class="s3">Given </span><span class="s4">I open url &quot;https://swisscows.com/&quot;</span>
+     <span class="s3">Then </span><span class="s4">I should see page title as &quot;Swisscows the alternative, data secure search engine.&quot;</span>
+     <span class="s3">Then </span><span class="s4">I should see page title contains &quot;Swisscows &quot;</span>
+     <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@class='input-search']&quot; should be present</span>
+     <span class="s3">When </span><span class="s4">I type &quot;Illinois&quot; into element with xpath &quot;//input[@class='input-search']&quot;</span>
+     <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//button[@class='search-submit']&quot;</span>
+     <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//input[@name='query'][@value='Illinois']&quot; to be present</span>
+     <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+     <span class="s3">Then </span><span class="s4">element with xpath &quot;//div[@id='viewport']&quot; should contain text &quot;Illinois&quot;</span>
+
+   <span class="s2">@predefined5</span>
+   <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for Search Encrypt</span>
+     <span class="s3">Given </span><span class="s4">I open url &quot;https://www.searchencrypt.com/home&quot;</span>
+     <span class="s3">Then </span><span class="s4">I should see page title as &quot;Search Encrypt | Home&quot;</span>
+     <span class="s3">Then </span><span class="s4">I should see page title contains &quot;Search&quot;</span>
+     <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@type='text']&quot; should be present</span>
+     <span class="s3">When </span><span class="s4">I type &quot;Behavior Driven Development&quot; into element with xpath &quot;//input[@type='text']&quot;</span>
+     <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//button[@type='submit']&quot;</span>
+     <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//*[@class='serp__results container']&quot; to be present</span>
+     <span class="s3">Then </span><span class="s4">element with xpath &quot;//*[@class='serp__results container']&quot; should contain text &quot;Behavior Driven Development&quot;</span>
+
+   <span class="s2">@predefined6</span>
+   <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for Wiki</span>
+     <span class="s3">Given </span><span class="s4">I open url &quot;https://www.wiki.com/&quot;</span>
+     <span class="s3">Then </span><span class="s4">I should see page title as &quot;Wiki.com&quot;</span>
+     <span class="s3">Then </span><span class="s4">I should see page title contains &quot;Wiki&quot;</span>
+     <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@name='q']&quot; should be present</span>
+     <span class="s3">When </span><span class="s4">I type &quot;Behavior Driven Development&quot; into element with xpath &quot;//input[@name='q']&quot;</span>
+     <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//input[@name='btnG']&quot;</span>
+     <span class="s3">Then </span><span class="s4">I should see page title contains &quot;Form is not secure&quot;</span>
+       <span class="s3">Then </span><span class="s4">I wait for 3 sec</span>
+     <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//button[@id='proceed-button']&quot;</span>
+       <span class="s3">Then </span><span class="s4">I wait for 3 sec</span>
+     <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//input[@type='text']&quot; to be present</span>
+     <span class="s3">Then </span><span class="s4">I switch to iframe with xpath &quot;//iframe[@name='googleSearchFrame']&quot;</span>
+     <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//*[@id='cse']&quot; to be present</span>
+     <span class="s3">Then </span><span class="s4">element with xpath &quot;//*[@id='cse']&quot; should contain text &quot;Behavior Driven Development&quot;</span>
+
+     <span class="s2">@predefined7</span>
+     <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for Startpage</span>
+       <span class="s3">Given </span><span class="s4">I open url &quot;https://www.startpage.com/&quot;</span>
+       <span class="s3">Then </span><span class="s4">I should see page title as &quot;Startpage - Private Search Engine. No Tracking. No Search History.&quot;</span>
+       <span class="s3">Then </span><span class="s4">I should see page title contains &quot;Startpage&quot;</span>
+       <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='q']&quot; should be present</span>
+       <span class="s3">When </span><span class="s4">I type &quot;Behavior Driven Development&quot; into element with xpath &quot;//input[@id='q']&quot;</span>
+       <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//button[@class='search-form-home__button-desktop']&quot;</span>
+       <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//div[@class='show-results']&quot; to be present</span>
+       <span class="s3">Then </span><span class="s4">element with xpath &quot;//div[@class='show-results']&quot; should contain text &quot;Behavior Driven Development&quot;</span>
+
+  <span class="s2">@predefined8</span>
+  <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for Yandex</span>
+    <span class="s3">Given </span><span class="s4">I open url &quot;https://yandex.com/&quot;</span>
+    <span class="s3">Then </span><span class="s4">I should see page title as &quot;Yandex&quot;</span>
+    <span class="s3">Then </span><span class="s4">I should see page title contains &quot;Yandex&quot;</span>
+    <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='text']&quot; should be present</span>
+    <span class="s3">When </span><span class="s4">I type &quot;Behavior Driven Development&quot; into element with xpath &quot;//input[@id='text']&quot;</span>
+    <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//button[@type='submit']&quot;</span>
+    <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//ul[@id='search-result']&quot; to be present</span>
+    <span class="s3">Then </span><span class="s4">element with xpath &quot;//ul[@id='search-result']&quot; should contain text &quot;Behavior Driven Development&quot;</span>
+
+    <span class="s2">@predefined9</span>
+    <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for Ecosia</span>
+      <span class="s3">Given </span><span class="s4">I open url &quot;https://www.ecosia.org/&quot;</span>
+      <span class="s3">Then </span><span class="s4">I should see page title as &quot;Ecosia - the search engine that plants trees&quot;</span>
+      <span class="s3">Then </span><span class="s4">I should see page title contains &quot;Ecosia&quot;</span>
+      <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@placeholder='Search the web to plant trees...']&quot; should be present</span>
+      <span class="s3">When </span><span class="s4">I type &quot;Behavior Driven Development&quot; into element with xpath &quot;//input[@placeholder='Search the web to plant trees...']&quot;</span>
+      <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//button[@type='submit']&quot;</span>
+      <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//div[@class='results-page']&quot; to be present</span>
+      <span class="s3">Then </span><span class="s4">element with xpath &quot;//div[@class='results-page']&quot; should contain text &quot;Behavior Driven Development&quot;</span>
+
+      <span class="s2">@predefined10</span>
+      <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for giveWater</span>
+        <span class="s3">Given </span><span class="s4">I open url &quot;https://www.givewater.com/&quot;</span>
+        <span class="s3">Then </span><span class="s4">I should see page title as &quot;Search the Web to Give Clean Water to Those in Need » giveWater Search Engine&quot;</span>
+        <span class="s3">Then </span><span class="s4">I should see page title contains &quot;giveWater&quot;</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='site-search']&quot; should be present</span>
+        <span class="s3">When </span><span class="s4">I type &quot;Behavior Driven Development&quot; into element with xpath &quot;//input[@id='site-search']&quot;</span>
+        <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//button[@id='button-addon2']&quot;</span>
+        <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//div[@class='mainline-results mainline-results__web']&quot; to be present</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//div[@class='mainline-results mainline-results__web']&quot; should contain text &quot;Behavior Driven Development&quot;</span>
+
+  <span class="s2">@predefined11</span>
+  <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Predefined steps for Ekoru</span>
+    <span class="s3">Given </span><span class="s4">I open url &quot;https://ekoru.org/&quot;</span>
+    <span class="s3">Then </span><span class="s4">I should see page title as &quot;Ekoru - every search cleans our oceans&quot;</span>
+    <span class="s3">Then </span><span class="s4">I should see page title contains &quot;Ekoru&quot;</span>
+    <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='fld_q']&quot; should be present</span>
+    <span class="s3">When </span><span class="s4">I type &quot;Behavior Driven Development&quot; into element with xpath &quot;//input[@id='fld_q']&quot;</span>
+    <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//div[@id='btn_search']&quot;</span>
+    <span class="s3">Then </span><span class="s4">I wait for element with xpath &quot;//div[@class='serp-wrapper']&quot; to be present</span>
+    <span class="s3">Then </span><span class="s4">element with xpath &quot;//div[@class='serp-wrapper']&quot; should contain text &quot;Behavior Driven Development&quot;</span>
+
+
+     
+
+
+    
+</pre>
+</body>
+</html>

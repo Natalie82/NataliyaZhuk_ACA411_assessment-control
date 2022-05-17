@@ -1,0 +1,233 @@
+<html>
+<head>
+<title>quote.feature</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #629755; font-style: italic;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #bbb529;}
+.s3 { color: #cc7832;}
+.s4 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+quote.feature</font>
+</center></td></tr></table>
+<pre><span class="s0">#Exercise for Quote Application</span>
+  <span class="s0">#Epic: https://jira.portnov.com/browse/ACA-659</span>
+  <span class="s0">#Author: Nataliya Zhuk</span>
+  <span class="s2">@quote</span>
+  <span class="s3">Feature</span><span class="s1">: </span><span class="s4">Quote Page Scenarios</span>
+    <span class="s3">Background</span><span class="s1">:</span>
+      <span class="s3">Given </span><span class="s4">I open url &quot;https://skryabin.com/market/quote.html&quot;</span>
+      <span class="s3">Then </span><span class="s4">I should see page title as &quot;Get a Quote&quot;</span>
+
+
+    <span class="s2">@quote1</span>
+      <span class="s0"># Test Case 1: Verify that Application Section has Location/Date/Time for</span>
+          <span class="s0"># Desktop and Tablet layouts but those disappear in Phone layouts</span>
+
+    <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Responsive UI</span>
+      <span class="s0"># Resize to desktop size</span>
+      <span class="s3">When </span><span class="s4">I resize window to 1349 and 704</span>
+      <span class="s3">Then </span><span class="s4">I wait for 3 sec</span>
+      <span class="s3">Then </span><span class="s4">element with xpath &quot;//b[@id='location']&quot; should be displayed</span>
+      <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@id='currentDate']&quot; should be displayed</span>
+      <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@id='currentTime']&quot; should be displayed</span>
+      <span class="s0"># Resize to iPad size</span>
+      <span class="s3">When  </span><span class="s4">I resize window to 800 and 1024</span>
+      <span class="s3">Then </span><span class="s4">I wait for 3 sec</span>
+      <span class="s3">Then </span><span class="s4">element with xpath &quot;//b[@id='location']&quot; should be displayed</span>
+      <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@id='currentDate']&quot; should be displayed</span>
+      <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@id='currentTime']&quot; should be displayed</span>
+      <span class="s0"># Resize to mobile size</span>
+      <span class="s3">When  </span><span class="s4">I resize window to 390 and 844</span>
+      <span class="s3">Then </span><span class="s4">I wait for 2 sec</span>
+      <span class="s3">But </span><span class="s4">element with xpath &quot;//b[@id='location']&quot; should not be displayed</span>
+      <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@id='currentDate']&quot; should not be displayed</span>
+      <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@id='currentTime']&quot; should not be displayed</span>
+
+
+    <span class="s2">@quote2</span>
+      <span class="s0"># Test Case 2: Fill out and validate “Username” field.</span>
+          <span class="s0"># Validate minimal “Username” field length requirement as 2 characters</span>
+
+     <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Validate minimal &quot;Username&quot; field length requirement as 2 characters</span>
+       <span class="s3">When </span><span class="s4">I type &quot;Q&quot; into element with xpath &quot;//input[@name='username']&quot;</span>
+       <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+       <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//button[@id='formSubmit']&quot;</span>
+       <span class="s3">Then </span><span class="s4">element with xpath &quot;//label[@id='username-error']&quot; should be displayed</span>
+       <span class="s3">Then </span><span class="s4">element with xpath &quot;//label[@id='username-error']&quot; should have text as &quot;Please enter at least 2 characters.&quot;</span>
+       <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+       <span class="s3">Then </span><span class="s4">I clear element with xpath &quot;//input[@name='username']&quot;</span>
+       <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+       <span class="s3">When </span><span class="s4">I type &quot;AA&quot; into element with xpath &quot;//input[@name='username']&quot;</span>
+       <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//button[@id='formSubmit']&quot;</span>
+       <span class="s3">But </span><span class="s4">element with xpath &quot;//label[@id='username-error']&quot; should not be displayed</span>
+
+      <span class="s2">@quote3</span>
+      <span class="s0"># Test Case 3: Validate &quot;Email&quot; field behavior</span>
+      <span class="s0"># Validate that email field accepts only valid email addresses.</span>
+
+      <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Email format validation</span>
+        <span class="s3">When </span><span class="s4">I type &quot;www&quot; into element with xpath &quot;//input[@name='email']&quot;</span>
+        <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//button[@id='formSubmit']&quot;</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//label[@id='email-error']&quot; should be displayed</span>
+        <span class="s3">And </span><span class="s4">element with xpath &quot;//label[@id='email-error']&quot; should contain text &quot;valid email address&quot;</span>
+        <span class="s3">Then </span><span class="s4">I clear element with xpath &quot;//input[@name='email']&quot;</span>
+        <span class="s3">And </span><span class="s4">element with xpath &quot;//label[@class='error']&quot; should contain text &quot;This field is required.&quot;</span>
+        <span class="s3">When </span><span class="s4">I type &quot;www@gmail.com&quot; into element with xpath &quot;//input[@name='email']&quot;</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//label[@id='email-error']&quot; should not be displayed</span>
+
+      <span class="s2">@quote4</span>
+      <span class="s0">#Test Case 4: Fill out and validate “Password” set of fields.</span>
+      <span class="s0"># Validate that Confirm Password is disabled if Password field is empty.</span>
+
+      <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Password validation and Confirm password disabled verification</span>
+        <span class="s3">When </span><span class="s4">I type &quot;w&quot; into element with xpath &quot;//input[@id='password']&quot;</span>
+        <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//input[@name='email']&quot;</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//label[@id='password-error']&quot; should be displayed</span>
+        <span class="s3">And </span><span class="s4">element with xpath &quot;//label[@id='password-error']&quot; should contain text &quot;5 characters&quot;</span>
+        <span class="s3">When </span><span class="s4">I type &quot;orld&quot; into element with xpath &quot;//input[@id='password']&quot;</span>
+        <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//input[@name='email']&quot;</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//label[@id='password-error']&quot; should not be displayed</span>
+       <span class="s3">And </span><span class="s4">I wait for 5 sec</span>
+        <span class="s3">And </span><span class="s4">I clear element with xpath &quot;//input[@id='password']&quot;</span>
+        <span class="s3">When </span><span class="s4">I click on element with xpath &quot;//input[@id='confirmPassword']&quot;</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='confirmPassword']&quot; should be disabled</span>
+        <span class="s3">When </span><span class="s4">I type &quot;word&quot; into element with xpath &quot;//input[@id='password']&quot;</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='confirmPassword']&quot; should be enabled</span>
+        <span class="s3">And </span><span class="s4">I clear element with xpath &quot;//input[@id='password']&quot;</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='confirmPassword']&quot; should be disabled</span>
+
+        <span class="s2">@quote5</span>
+      <span class="s0"># Test Case 5:Validate “Name” field behavior Modal dialog</span>
+      <span class="s0"># Verification that upon clicking inside of Name field popup dialog appears.</span>
+      <span class="s0"># Name concatenation: verify that after putting First Name, Middle Name, Last Name,</span>
+      <span class="s0"># it concatenates it correctly and puts the value in the Name field</span>
+
+      <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Name validation</span>
+        <span class="s3">When </span><span class="s4">I click on element with xpath &quot;//input[@id='name']&quot;</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//div[@aria-describedby='nameDialog']&quot; should be displayed</span>
+        <span class="s3">When </span><span class="s4">I type &quot;Nataliya&quot; into element with xpath &quot;//input[@id='firstName']&quot;</span>
+        <span class="s3">And </span><span class="s4">I type &quot;Zh&quot; into element with xpath &quot;//input[@id='lastName']&quot;</span>
+        <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//span[contains(text(),'Save')]&quot;</span>
+        <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+        <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='name']&quot; should have attribute &quot;value&quot; as &quot;Nataliya Zh&quot;</span>
+
+        <span class="s2">@quote6</span>
+        <span class="s0"># Test Case 6: Validate that Accepting Privacy Policy is required to submit the form,</span>
+        <span class="s0"># then check the field</span>
+
+     <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Accepting Privacy Policy required</span>
+          <span class="s3">When </span><span class="s4">I click on element with xpath &quot;//input[@id='name']&quot;</span>
+          <span class="s3">Then </span><span class="s4">element with xpath &quot;//div[@aria-describedby='nameDialog']&quot; should be displayed</span>
+          <span class="s3">When </span><span class="s4">I type &quot;Nataliya&quot; into element with xpath &quot;//input[@id='firstName']&quot;</span>
+          <span class="s3">And </span><span class="s4">I type &quot;Zhuk&quot; into element with xpath &quot;//input[@id='lastName']&quot;</span>
+          <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//span[contains(text(),'Save')]&quot;</span>
+          <span class="s3">And </span><span class="s4">I wait for 1 sec</span>
+          <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='name']&quot; should have attribute &quot;value&quot; as &quot;Nataliya Zhuk&quot;</span>
+          <span class="s3">And </span><span class="s4">I type &quot;Nata&quot; into element with xpath &quot;//input[@name='username']&quot;</span>
+          <span class="s3">And </span><span class="s4">I type &quot;www@gmail.com&quot; into element with xpath &quot;//input[@name='email']&quot;</span>
+          <span class="s3">And </span><span class="s4">I type &quot;world&quot; into element with xpath &quot;//input[@id='password']&quot;</span>
+          <span class="s3">And </span><span class="s4">I type &quot;world&quot; into element with xpath &quot;//input[@id='confirmPassword']&quot;</span>
+          <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//button[@id='formSubmit']&quot;</span>
+          <span class="s3">Then </span><span class="s4">element with xpath &quot;//label[@id='agreedToPrivacyPolicy-error']&quot; should contain text &quot;- Must check!&quot;</span>
+          <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+          <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//input[@ng-model='formData.agreedToPrivacyPolicy']&quot;</span>
+          <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//button[@id='formSubmit']&quot;</span>
+
+       <span class="s2">@quote7</span>
+      <span class="s0"># Test Case 7 (optional):</span>
+      <span class="s0">#Try entering the following non-required fields in the order:</span>
+      <span class="s0">#• Phone Number</span>
+      <span class="s0">#• Country of Origin</span>
+      <span class="s0">#• Gender</span>
+      <span class="s0">#• Allowed to Contact?</span>
+      <span class="s0">#• Address</span>
+      <span class="s0">#• Car Make</span>
+      <span class="s0">#• 3rd party agreement acceptance</span>
+      <span class="s0">#• Date</span>
+     <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Optional fields</span>
+         <span class="s3">When </span><span class="s4">I click on element with xpath &quot;//select[@name='countryOfOrigin']/option[contains(text(),'Ukraine')]&quot;</span>
+         <span class="s3">And </span><span class="s4">I type &quot;2500 Walton Street, Chicago, IL&quot; into element with xpath &quot;//textarea[@id='address']&quot;</span>
+         <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@id='currentDate']&quot; should be present</span>
+         <span class="s3">And </span><span class="s4">I type &quot;773773773&quot; into element with xpath &quot;//input[@name='phone']&quot;</span>
+         <span class="s3">When </span><span class="s4">I click on element with xpath &quot;//input[@id='dateOfBirth']&quot;</span>
+         <span class="s3">Then </span><span class="s4">element with xpath &quot;//div[@id='ui-datepicker-div']&quot; should be displayed</span>
+         <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//option[contains(text(),'Feb')]&quot;</span>
+         <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//option[contains(text(),'2002')]&quot;</span>
+         <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//td[@data-handler='selectDay']/a[text()='1']&quot;</span>
+         <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//input[@value='female']&quot;</span>
+         <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//select[@name='carMake']/option[@value='Other']&quot;</span>
+         <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//button[@id='thirdPartyButton']&quot;</span>
+         <span class="s3">And </span><span class="s4">I accept alert</span>
+         <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+         <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//input[@ng-model='formData.allowedToContact']&quot;</span>
+         <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+
+         <span class="s2">@quote8</span>
+         <span class="s0"># Test Case 8: Submit the form and verify the data.</span>
+         <span class="s0"># Validate that after form submission entered fields values are present on the page.</span>
+         <span class="s0"># Validate that password is not displayed on the page</span>
+           
+         <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Submit form</span>
+         <span class="s0"># Required fields</span>
+           <span class="s3">Given </span><span class="s4">I open url &quot;https://skryabin.com/market/quote.html&quot;</span>
+           <span class="s3">Then </span><span class="s4">I should see page title as &quot;Get a Quote&quot;</span>
+           <span class="s3">When </span><span class="s4">I click on element with xpath &quot;//input[@id='name']&quot;</span>
+           <span class="s3">Then </span><span class="s4">element with xpath &quot;//div[@aria-describedby='nameDialog']&quot; should be displayed</span>
+           <span class="s3">When </span><span class="s4">I type &quot;Nataliya&quot; into element with xpath &quot;//input[@id='firstName']&quot;</span>
+           <span class="s3">And </span><span class="s4">I type &quot;Zhuk&quot; into element with xpath &quot;//input[@id='lastName']&quot;</span>
+           <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//span[contains(text(),'Save')]&quot;</span>
+           <span class="s3">And </span><span class="s4">I wait for 1 sec</span>
+           <span class="s3">Then </span><span class="s4">element with xpath &quot;//input[@id='name']&quot; should have attribute &quot;value&quot; as &quot;Nataliya Zhuk&quot;</span>
+           <span class="s3">And </span><span class="s4">I type &quot;Nata&quot; into element with xpath &quot;//input[@name='username']&quot;</span>
+           <span class="s3">And </span><span class="s4">I type &quot;www@gmail.com&quot; into element with xpath &quot;//input[@name='email']&quot;</span>
+           <span class="s3">And </span><span class="s4">I type &quot;world&quot; into element with xpath &quot;//input[@id='password']&quot;</span>
+           <span class="s3">And </span><span class="s4">I type &quot;world&quot; into element with xpath &quot;//input[@id='confirmPassword']&quot;</span>
+           <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//input[@name='agreedToPrivacyPolicy']&quot;</span>
+     <span class="s0"># Optional fields</span>
+           <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//select[@name='countryOfOrigin']/option[contains(text(),'Ukraine')]&quot;</span>
+           <span class="s3">And </span><span class="s4">I type &quot;2500 Walton Street, Chicago, IL&quot; into element with xpath &quot;//textarea[@id='address']&quot;</span>
+           <span class="s3">And </span><span class="s4">I type &quot;773773773&quot; into element with xpath &quot;//input[@name='phone']&quot;</span>
+           <span class="s3">When </span><span class="s4">I click on element with xpath &quot;//input[@id='dateOfBirth']&quot;</span>
+           <span class="s3">Then </span><span class="s4">element with xpath &quot;//div[@id='ui-datepicker-div']&quot; should be displayed</span>
+           <span class="s3">Then </span><span class="s4">I click on element with xpath &quot;//option[contains(text(),'Feb')]&quot;</span>
+           <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//option[contains(text(),'2002')]&quot;</span>
+           <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//td[@data-handler='selectDay']/a[text()='1']&quot;</span>
+           <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//input[@value='female']&quot;</span>
+           <span class="s3">And </span><span class="s4">I click on element with xpath &quot;//select[@name='carMake']/option[@value='Other']&quot;</span>
+           <span class="s3">When </span><span class="s4">I click on element with xpath &quot;//button[@id='formSubmit']&quot;</span>
+           <span class="s3">Then </span><span class="s4">element with xpath &quot;//legend[@class='applicationResult']&quot; should contain text &quot;Submitted Application&quot;</span>
+           <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='firstName']&quot; should contain text &quot;Nataliya&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='lastName']&quot; should contain text &quot;Zhuk&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='name']&quot; should contain text &quot;Nataliya Zhuk&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='username']&quot; should contain text &quot;Nata&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='email']&quot; should contain text &quot;www@gmail.com&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='password']&quot; should contain text &quot;[entered]&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='countryOfOrigin']&quot; should contain text &quot;Ukraine&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='address']&quot; should contain text &quot;2500 Walton Street, Chicago, IL&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='phone']&quot; should contain text &quot;773773773&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='dateOfBirth']&quot; should contain text &quot;02/01/2002&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='gender']&quot; should contain text &quot;female&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='carMake']&quot; should contain text &quot;Other&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='agreedToPrivacyPolicy']&quot; should contain text &quot;true&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='location']&quot; should contain text &quot;Los Altos, CA 94022&quot;</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='currentDate']&quot; should be present</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//b[@name='currentTime']&quot; should be present</span>
+           <span class="s3">And </span><span class="s4">I wait for 2 sec</span>
+           <span class="s3">And </span><span class="s4">element with xpath &quot;//button[@id='return']&quot; should be present</span>
+           <span class="s3">When </span><span class="s4">I click on element with xpath &quot;//button[@id='return']&quot;</span>
+           <span class="s3">Then </span><span class="s4">I should see page title as &quot;Get a Quote&quot;</span>
+           <span class="s3">And </span><span class="s4">I wait for 2 sec</span>
+
+
+
+</pre>
+</body>
+</html>

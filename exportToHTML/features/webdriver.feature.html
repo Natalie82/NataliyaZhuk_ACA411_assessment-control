@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>webdriver.feature</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #629755; font-style: italic;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #bbb529;}
+.s3 { color: #cc7832;}
+.s4 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+webdriver.feature</font>
+</center></td></tr></table>
+<pre><span class="s0"># Exercise for Webdriver experience</span>
+  
+  <span class="s2">@webdriver</span>
+  <span class="s3">Feature</span><span class="s1">: </span><span class="s4">Exercise for Webdriver experience</span>
+    <span class="s3">Background</span><span class="s1">:</span>
+      <span class="s3">Given </span><span class="s4">I navigate &quot;quote&quot;</span>
+    <span class="s2">@webdriver1</span>
+    <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Open URL using site name</span>
+      <span class="s0">#Given I navigate &quot;quote&quot;</span>
+      <span class="s3">And </span><span class="s4">I print page details</span>
+      <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+
+    <span class="s2">@webdriver2</span>
+    <span class="s3">Scenario</span><span class="s1">: </span><span class="s4">Email field verification</span>
+      <span class="s3">When </span><span class="s4">I type &quot;www&quot; into email field</span>
+      <span class="s3">And </span><span class="s4">I click Submit button</span>
+      <span class="s3">Then </span><span class="s4">Error message &quot;Please enter a valid email address&quot; should be displayed</span>
+      <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+      <span class="s3">Then </span><span class="s4">I clear Email field</span>
+      <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+      <span class="s3">And </span><span class="s4">xpath should has the same text &quot;This field is required.&quot;</span>
+      <span class="s3">When </span><span class="s4">I type correct email &quot;www@gmail.com&quot;</span>
+      <span class="s3">And </span><span class="s4">The error message should not be displayed</span>
+      <span class="s3">And </span><span class="s4">I wait for 3 sec</span>
+
+
+
+
+</pre>
+</body>
+</html>
